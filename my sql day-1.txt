@@ -1,0 +1,441 @@
+
+DAY-1
+
+https://tinyur1.com/MYSQLPFSDA-0NOTES
+
+Day-2
+
+WHAT IS DATE
+
+raw facts or figures withouy context
+eg:101,malli,50000,hyd
+
+ WHAT IS FIELD
+ smallest unit of date in database(coloumn/attribute)
+eg: ename,esalary,eaddress,eld
+
+what is record 
+collection of related fields (row/tuple)
+eg: an (101,sunny,50000)
+ 
+what is database
+organizesd collection of related record stored together
+eg:an employee datebase containing all employee records
+
+client-server-arch
+client:the role of the client in client-server in client-server arch is to take request from the client,
+if the request it will generate some response wecan handover that response to client ,if the client request 
+Command
+Description / Definition
+DDL
+Data Definition Language - defines and modifies the structure of database objects (tables, schemas, indexes).
+DML
+Data Manipulation Language - manages data stored within database objects (insert, update, delete).
+DQL
+Data Query Language - used to fetch/retrieve data from the database.
+DCL
+Data Control Language - manages permissions and access control on database objects.
+TCL
+Transaction Control Language - manages transactions to maintain data integrity.
+
+
+ 
+
+CREATE
+Creates a new database object such as a table, database, view, index, or schema.
+ Example: CREATE TABLE Students (ID INT, Name VARCHAR(50));
+
+column-name datetypes(size) constraint;
+column-name datetypes(size) constraint;
+column-name datetypes(size) constraint;
+--------------------------------------
+-------------------------------------
+column-name datetypes(size) constraint;
+
+ DROP
+
+Permanently deletes an existing database object 
+(table, database, index, view) along with all its data and structure.
+ This action cannot be rolled back in most databases.
+
+DAY-6(DOM)
+
+C:PROGRAMFILES....>MYSQL>SERVR>8.0
+
+MYSQL-U RAMU-P
+MYSQL-U KRISHNA-P
+USE DA6;
+SELECT*FROM STUDENTS;
+INSENT INTO STUDENTS VALUES(222,'MAHI',MAHI@CODEGANA');
+DELETE FROM STUDENTS WHRER SID=111;
+DROP TABLE STUDENTS;
+DELETE FROM STUDENTS WHRER SNO=111;
+
+USE DA6;
+SELECT*FROM STUDENTS;
+ALTER TABLE STUDENTS DROP COLUMN  SEMAIL;
+
+DELETE FROM STUDENTS WHRER SID=111;
+DROP TABLE STUDENTS;
+DELETE FROM STUDENTS WHRER SNO=111;
+
+DAY-7:
+OPERTORS:
+ WHAT IS AN OPERTORS?
+OPERTOR is a symbol it performs specific taske,
+syntax:
+operand    OPERTOR   operand 
+a            +         b
+
+1.Arithmetic Operators
+Definition
+Arithmetic operators are used to perform mathematical calculations on numeric values.
+
+1)CALCULATE DISOCUNTED price by subtracting price wthi 5 rs
+ans)select name,price,price-5 as discount price from proction;
+2)toatal inv
+
+Comparison Operators
+
+ Insert Records
+INSERT INTO StudentScores VALUES
+ (1, 'Alice', 'Math', 95),
+ (2, 'Bob', 'Math', 76),
+ (3, 'Charlie', 'Math', 59),
+ (4, 'Diana', 'Math', 88),
+ (5, 'Eve', 'Math', 40),
+ (6, 'Frank', 'Math', 95),
+ (7, 'Grace', 'Science', 67),
+ (8, 'Henry', 'Science', 82),
+ (9, 'Ivy', 'English', 91),
+ (10, 'Jack', 'English', 55),
+ (11, 'Kevin', 'Math', 73),
+ (12, 'Lily', 'Science', 48),
+ (13, 'Mia', 'English', 100),
+ (14, 'Noah', 'Math', 64),
+ (15, 'Olivia', 'Science', 79);
+
+SELECT Queries
+Q1. Display students who scored more than 80.
+SELECT *
+ FROM StudentScores
+ WHERE marks > 80;
+
+Q2. Display students who scored 60 or more.
+SELECT *
+ FROM StudentScores
+ WHERE marks >= 60;
+
+Q3. Display students who scored less than 50.
+SELECT *
+ FROM StudentScores
+ WHERE marks < 50;
+
+Q4. Display students who scored exactly 95.
+SELECT *
+ FROM StudentScores
+ WHERE marks = 95;
+
+Q5. Display students who did not score 95.
+SELECT *
+ FROM StudentScores
+ WHERE marks != 95;
+
+Q6. Display students who scored 60 or less.
+SELECT *
+ FROM StudentScores
+ WHERE marks <= 60;
+
+Q7. Display students who scored more than 70.
+SELECT *
+ FROM StudentScores
+ WHERE marks > 70;
+
+Q8. Display students who scored less than or equal to 75.
+SELECT *
+ FROM StudentScores
+ WHERE marks <= 75;
+
+Q9. Display students who scored exactly 100.
+SELECT *
+ FROM StudentScores
+ WHERE marks = 100;
+
+Q10. Display students who did not score 40.
+SELECT *
+ FROM StudentScores
+ WHERE marks <> 40;
+
+Q11. Display students who scored more than or equal to 90.
+SELECT *
+ FROM StudentScores
+ WHERE marks >= 90;
+
+Q12. Display students who scored less than 65.
+SELECT *
+ FROM StudentScores
+ WHERE marks < 65;
+
+UPDATE Queries(SET SQL_SAFE_UPDATE=0;)
+Q1. Increase marks by 10 for students scoring below 50.
+UPDATE StudentScores
+ SET marks = marks + 10
+ WHERE marks < 50;
+
+Q2. Increase marks by 5 for students scoring 60 or below.
+UPDATE StudentScores
+ SET marks = marks + 5
+ WHERE marks <= 60;
+
+Q3. Add 2 bonus marks to students scoring above 90.
+UPDATE StudentScores
+ SET marks = marks + 2
+ WHERE marks > 90;
+
+Q4. Add 3 bonus marks to students scoring 80 or more.
+UPDATE StudentScores
+ SET marks = marks + 3
+ WHERE marks >= 80;
+
+Q5. Reduce 1 mark for students who did not score exactly 95.
+UPDATE StudentScores
+ SET marks = marks - 1
+ WHERE marks != 95;
+
+Q6. Set marks to 100 for students who scored exactly 95.
+UPDATE StudentScores
+ SET marks = 100
+ WHERE marks = 95;
+
+Q7. Increase marks by 15 for students scoring below 60.
+UPDATE StudentScores
+ SET marks = marks + 15
+ WHERE marks < 60;
+
+Q8. Add 5 marks for students scoring above 75.
+UPDATE StudentScores
+ SET marks = marks + 5
+ WHERE marks > 75;
+
+Q9. Reduce 3 marks for students scoring above 95.
+UPDATE StudentScores
+ SET marks = marks - 3
+ WHERE marks > 95;
+
+Q10. Set marks to 75 for students scoring below 50.
+UPDATE StudentScores
+ SET marks = 75
+ WHERE marks < 50;
+
+Q11. Increase marks by 8 for students scoring exactly 64.
+UPDATE StudentScores
+ SET marks = marks + 8
+ WHERE marks = 64;
+
+Q12. Reduce 5 marks for students scoring 100.
+UPDATE StudentScores
+ SET marks = marks - 5
+ WHERE marks = 100;
+
+DELETE Queries
+Q1. Delete students who scored below 50.
+DELETE FROM StudentScores
+ WHERE marks < 50;
+
+Q2. Delete students who scored 60 or below.
+DELETE FROM StudentScores
+ WHERE marks <= 60;
+
+Q3. Delete students who scored above 90.
+DELETE FROM StudentScores
+ WHERE marks > 90;
+
+Q4. Delete students who scored 80 or more.
+DELETE FROM StudentScores
+ WHERE marks >= 80;
+
+Q5. Delete students whose marks are not equal to 95.
+DELETE FROM StudentScores
+ WHERE marks != 95;
+
+Q6. Delete students who scored exactly 76.
+DELETE FROM StudentScores
+ WHERE marks = 76;
+
+Q7. Delete students who scored exactly 100.
+DELETE FROM StudentScores
+ WHERE marks = 100;
+
+Q8. Delete students who scored less than 65.
+DELETE FROM StudentScores
+ WHERE marks < 65;
+
+Q9. Delete students who scored greater than or equal to 90.
+DELETE FROM StudentScores
+ WHERE marks >= 90;
+
+Q10. Delete students who scored exactly 73.
+DELETE FROM StudentScores
+ WHERE marks = 73;
+
+Q11. Delete students who scored exactly 48.
+DELETE FROM StudentScores
+ WHERE marks = 48;
+
+Q12. Delete students who scored between 70 and 80 (using comparison operators).
+DELETE FROM StudentScores
+ WHERE marks >= 70 AND marks <= 80;
+
+logical and:
+if both are true  reture true
+
+ logical or:
+if both are false reture false
+
+DAY-9
+
+Taxi service company 
+
+
+
+
+
+SQL Identifiers
+----------------
+
+SQL identifiers are names used to identify database objects such as.
+Database names, Table names, Column names, view names, index names, constraints, triggers, stored procedures.
+
+While we are declaring an identifier we have to follow some rules and regulations.
+
+1. the only allowed characters to declare identifiers a-z or A-Z or 0-9,_,$
+2. must begin with a letter or underscore(_).
+3. we can't declare identifiers with reserved keywords.
+4. spaces are not considered to declare identifiers.
+5. identifiers are case sensitive
+6. max length to declare identifiers are 15 characters.
+
+
+SQL (Structured Query Language) commands are broadly classified into five main categories based on their functionality: DDL, DML, DQL, DCL, and TCL. Each category and every command within it is explained below with its purpose and usage.
+Command
+Description / Definition
+DDL
+Data Definition Language - defines and modifies the structure of database objects (tables, schemas, indexes).
+DML
+Data Manipulation Language - manages data stored within database objects (insert, update, delete).
+DQL
+Data Query Language - used to fetch/retrieve data from the database.
+DCL
+Data Control Language - manages permissions and access control on database objects.
+TCL
+Transaction Control Language - manages transactions to maintain data integrity.
+
+
+ 
+1. DDL - Data Definition Language
+DDL commands are used to define, create, alter, and remove the structure of database objects such as tables, schemas, and indexes. Changes made by DDL commands are auto-committed and permanent.
+Command
+Description / Definition
+CREATE
+Creates a new database object such as a table, database, view, index, or schema. Example: CREATE TABLE Students (ID INT, Name VARCHAR(50));
+ALTER
+Modifies the structure of an existing database object, such as adding, deleting, or modifying columns in a table. Example: ALTER TABLE Students ADD Email VARCHAR(100);
+DROP
+Permanently deletes an existing database object (table, database, index, view) along with all its data and structure. This action cannot be rolled back in most databases.
+TRUNCATE
+Removes all rows/records from a table quickly while keeping the table structure intact for future use. Faster than DELETE as it does not log individual row deletions.
+RENAME
+Renames an existing database object, such as a table or column, to a new name without changing its structure or data.
+COMMENT
+Adds explanatory notes or comments to database objects (tables, columns) for documentation purposes; does not affect data or structure.
+
+2. DML - Data Manipulation Language
+DML commands are used to insert, update, delete, and manage data stored inside existing database tables. Unlike DDL, DML changes can typically be rolled back if not committed.
+Command
+Description / Definition
+INSERT
+Adds new rows/records of data into a table. Example: INSERT INTO Students (ID, Name) VALUES (1, 'Ravi');
+UPDATE
+Modifies existing records in a table by changing the values of one or more columns based on a specified condition. Example: UPDATE Students SET Name='Kumar' WHERE ID=1;
+DELETE
+Removes one or more existing rows from a table based on a specified condition, while keeping the table structure. Can be rolled back if used within a transaction.
+MERGE
+Combines INSERT, UPDATE, and DELETE operations into a single statement by comparing source and target tables (also called an 'upsert').
+CALL
+Invokes or executes a stored procedure to perform a set of predefined operations.
+EXPLAIN PLAN
+Describes the access path or execution plan that the database will use to run a given SQL statement, used mainly for performance tuning.
+LOCK TABLE
+Controls concurrency by locking a table to restrict access from other transactions while it is being modified.
+
+3. DQL - Data Query Language
+DQL consists of commands used purely to query and retrieve data from one or more tables without modifying it.
+Command
+Description / Definition
+SELECT
+Retrieves data from one or more tables or views based on specified columns and conditions. It is the most frequently used SQL command. Example: SELECT Name FROM Students WHERE ID=1;
+
+
+ 
+4. DCL - Data Control Language
+DCL commands deal with the rights, permissions, and other access controls of the database system, determining which users can access or manipulate data.
+Command
+Description / Definition
+GRANT
+Gives specific privileges or permissions (such as SELECT, INSERT, UPDATE, DELETE) to a database user or role. Example: GRANT SELECT ON Students TO User1;
+REVOKE
+Removes previously granted privileges or permissions from a database user or role, restricting their access to database objects.
+
+5. TCL - Transaction Control Language
+TCL commands manage transactions within a database to ensure data integrity, consistency, and to group DML statements into logical units of work.
+Command
+Description / Definition
+COMMIT
+Permanently saves all changes made during the current transaction to the database, making them visible to other users.
+ROLLBACK
+Undoes/reverts changes made during the current transaction back to the last committed state or a savepoint, in case of an error.
+SAVEPOINT
+Sets a temporary marker within a transaction to which you can later roll back, without undoing the entire transaction.
+SET TRANSACTION
+Defines properties for a transaction, such as its isolation level, to control how it interacts with other concurrent transactions.
+RELEASE SAVEPOINT
+Removes a previously created savepoint from the current transaction, freeing associated resources.
+
+Note: Some references also group SELECT under DML instead of a separate DQL category, and command availability/syntax may vary slightly across database systems (MySQL, PostgreSQL, Oracle, SQL Server).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
