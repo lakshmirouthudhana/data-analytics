@@ -1,0 +1,296 @@
+system information function:
+---------------------------
+
+Aggregate functions()
+---------------------
+1.count():- the value is null to column.
+2.min():- low expereince value
+3.max():-high value expereince
+4.avg();:-amount value salary avg
+5.sum();:- total  amount salary in value 
+
+Clauses in MYSQL
+-------------------------------
+In MySQL, clauses are used to control how data is selected, filtered, grouped, sorted, or modified in SQL queries.
+ They make SQL statements more meaningful and powerful.
+Think of clauses like instructions given to the database.
+
+where clause
+================
+filter records based on specified conditions where clauses can be used as comparison operators, logical operators and ..etc operators.
+
+syntax
+---------
+select column1,column2....
+from table
+where condition.
+
+Group by clause
+===================
+The group by clause is used to group rows having the same values in one or more columns. 
+It is commonly used with aggregate functions such as sum(),min(),max(),avg(),count().
+
+syntax
+---------
+select column-name,aggregate_function(column-name)
+from table-name
+group by column_name.
+
+Having Clause
+---------------
+The having clause is used to filter grouped records after group by clause. it is similar to where but it works on grouped instead of individual rows.
+
+syntax
+-----------
+select column-name,
+aggregate_function(column-name)
+from table-name
+group by column-name
+having condition.
+
+Order By Clause
+------------------
+the order by clause is used to sort the result set in ascending(ASC)or descending(Desc)order.
+asc-->Ascending order by default.
+Desc-->Descending order
+
+syntax:
+----------
+select column-name
+from table-name
+order by column-name asc;
+ 
+
+
+—--
+Step 1: Create Table
+CREATE TABLE STUDENTS (
+    StudentID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50),
+    Age INT,
+    Department VARCHAR(30),
+    Marks INT,
+    City VARCHAR(30)
+
+
+ Insert Sample Data (without StudentID)
+INSERT INTO STUDENTS (Name, Age, Department, Marks, City) VALUES
+('Anil', 20, 'CSE', 85, 'Hyderabad'),
+('Sneha', 22, 'ECE', 75, 'Mumbai'),
+('Ravi', 20, 'CSE', NULL, 'Hyderabad'),
+('Divya', 23, 'MECH', 65, NULL),
+('Kiran', 22, 'ECE', 75, 'Pune'),
+('Varun', 21, 'CSE', 92, 'Chennai'),
+('Priya', 20, 'EEE', 88, 'Delhi'),
+('John', 22, 'MECH', 55, 'Mumbai'),
+('Rekha', 21, 'ECE', 75, 'Pune'),
+('Ramesh', 23, 'EEE', NULL, 'Delhi');
+
+select*from students;
+
+Execution Order:
+-------------
+1)FROM
+2)WHERE
+3)GROUP BY
+4)HAVING
+5)SELECT
+6)ORDER BY
+
+Q1)Display the average marks of each department considering only students older than 20 years. 
+Show departments whose average marks are greater than 70 and sort the results
+by average marks in descending order.
+
+select department,avg(marks)as average_marks from students where age>20
+group by department
+having average_marks>70
+order by average_marks desc;
+
+Q2)Display the total number of students in each city considering only students whose marks are greater than 70. 
+Show cities having more than one student and sort by total students.
+
+SELECT City,
+ COUNT() AS Total_Students
+ FROM students
+ WHERE Marks >70
+ GROUP BY City
+ HAVING COUNT() >1
+ ORDER BY Total_Students DESC;
+
+Q3)Display the total marks of each department considering only students from Hyderabad and Pune. 
+Show departments whose total marks are greater than 100 and order by total marks.
+
+SELECT Department,
+ SUM(Marks) AS Total_Marks
+ FROM students
+ WHERE City IN ('Hyderabad','Pune')
+ GROUP BY Department
+ HAVING SUM(Marks) > 100
+ ORDER BY Total_Marks DESC;
+
+Q4)Display the highest marks obtained in each city considering only students from the ECE department. 
+Show cities whose highest marks are greater than 70 and order by highest marks.
+
+SELECT City,
+ MAX(Marks) AS Highest_Marks
+ FROM students
+ WHERE Department='ECE'
+ GROUP BY City
+ HAVING MAX(Marks) >70
+ ORDER BY Highest_Marks DESC;
+
+Q5)
+Display the average age of students in each department considering only students whose city is not NULL. 
+Show departments whose average age is greater than 20 and sort alphabetically.
+
+SELECT Department,
+ AVG(Age) AS Average_Age
+ FROM students
+ WHERE City IS NOT NULL
+ GROUP BY Department
+ HAVING AVG(Age) >20
+ ORDER BY Department;
+
+Clauses Exercises
+
+(1,  'Keyboard',    'Electronics', 10, 1200,  'North'),
+(2,  'Monitor',     'Electronics', 5,  7000,  'South'),
+(3,  'Chair',       'Furniture',   15, 2500,  'North'),
+(4,  'Desk',        'Furniture',   7,  4500,  'West'),
+(5,  'Mouse',       'Electronics', 20, 800,   'East'),
+(6,  'Sofa',        'Furniture',   3,  15000, 'South'),
+(7,  'Headphones',  'Electronics', 8,  1800,  'North'),
+(8,  'Laptop',      'Electronics', 6,  55000, 'West'),
+(9,  'Table',       'Furniture',   12, 6000,  'East'),
+(10, 'Fan',         'Home Appliance', 18, 3000, 'South'),
+(11, 'AC',          'Home Appliance', 4, 35000, 'North'),
+(12, 'Cupboard',    'Furniture',   5, 12000, 'West'),
+(13, 'Printer',     'Electronics', 9, 9000,  'East'),
+(14, 'Bed',         'Furniture',   2, 25000, 'South'),
+(15, 'Mobile',      'Electronics', 14, 20000, 'North');
+
+
+Q1)Total units sold per category where total units > 20
+
+ SELECT category, SUM(units_sold) AS total_units
+ FROM sales
+ GROUP BY category
+ HAVING SUM(units_sold) > 20;
+
+ Q2)Total revenue per region where revenue > 50000
+
+ SELECT region,
+ SUM(units_sold * unit_price) AS revenue
+ FROM sales
+ GROUP BY region
+ HAVING SUM(units_sold * unit_price) > 50000;
+
+Q3)Count of products per category with more than 2 products
+
+ SELECT category,
+ COUNT(product) AS product_count
+ FROM sales
+ GROUP BY category
+ HAVING COUNT(product) > 2;
+
+Q4)Average unit price per category < 5000
+
+ SELECT category,
+ AVG(unit_price) AS avg_price
+ FROM sales
+ GROUP BY category
+
+Q5)Regions with more than 1 Electronics product
+
+ SELECT region,
+ COUNT(product) AS electronics_count
+ FROM sales
+ WHERE category='Electronics'
+ GROUP BY region
+ HAVING COUNT(product) > 1;
+
+Q6)
+Categories and total units sold, ordered descending
+
+ SELECT category,
+ SUM(units_sold) AS total_units
+ FROM sales
+ GROUP BY category
+ ORDER BY total_units DESC;
+
+Q7)Average unit price per region, ordered alphabetically
+
+ SELECT region,
+ AVG(unit_price) AS avg_price
+ FROM sales
+ GROUP BY region
+ ORDER BY region ASC;
+
+Q8)Total revenue per category, highest first SELECT category,
+
+ SUM(units_sold * unit_price) AS revenue
+ FROM sales
+ GROUP BY category
+ ORDER BY revenue DESC;
+
+Q9)Count of products in each region, descending
+
+ SELECT region,
+ COUNT(product) AS product_count
+ FROM sales
+ GROUP BY region
+ ORDER BY product_count DESC;
+
+Q10)Regions and total units sold, sorted by region
+
+ SELECT region,
+ SUM(units_sold) AS total_units
+ FROM sales
+ GROUP BY region
+ ORDER BY region;
+
+Q11)Total revenue per region > 20000, order by revenue descending
+
+ SELECT region,
+ SUM(units_sold * unit_price) AS revenue
+ FROM sales
+ GROUP BY region
+ HAVING SUM(units_sold * unit_price) > 20000
+ ORDER BY revenue DESC;
+
+Q12)Total units sold per category > 10, order by category
+
+ SELECT category,
+ SUM(units_sold) AS total_units
+ FROM sales
+ GROUP BY category
+ HAVING SUM(units_sold) > 10
+ ORDER BY category;
+
+Q13)Count of products per region > 1, order alphabetically
+
+ SELECT region,
+ COUNT(product) AS product_count
+ FROM sales
+ GROUP BY region
+ HAVING COUNT(product) > 1
+ ORDER BY region;
+
+Q14)Categories where avg price < 6000, order by avg price
+
+ SELECT category,
+ AVG(unit_price) AS avg_price
+ FROM sales
+ GROUP BY category
+ HAVING AVG(unit_price) < 6000
+ ORDER BY avg_price;
+
+Q15)Avg units sold per category > 5, order by average descending
+
+ SELECT category,
+ AVG(units_sold) AS avg_units
+ FROM sales
+ GROUP BY category
+ HAVING AVG(units_sold) > 5
+ ORDER BY avg_units DESC;
+
