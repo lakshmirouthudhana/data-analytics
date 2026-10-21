@@ -1,0 +1,194 @@
+CREATE DATABASE pizza_store;
+USE pizza_store;
+ 
+ #CHEFS TABLE
+CREATE TABLE chefs (
+    chef_id INT PRIMARY KEY AUTO_INCREMENT,
+    chef_name VARCHAR(100) NOT NULL,
+    experience INT
+);
+#-- 2. CATEGORIES TABLE
+
+#-- 3. CUSTOMERS TABLE
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(15)
+);
+-- 4. PIZZAS TABLE
+CREATE TABLE pizzas (
+    pizza_id INT PRIMARY KEY AUTO_INCREMENT,
+    pizza_name VARCHAR(100) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    stock_quantity INT DEFAULT 0,
+    chef_id INT,
+    category_id INT,
+    FOREIGN KEY (chef_id) REFERENCES chefs(chef_id),
+    FOREIGN KEY (category_id) REFERENCES categories(category_id)
+);
+-- 5. ORDERS TABLE
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_date DATE NOT NULL,
+    customer_id INT NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+ #6. ORDER_DETAILS TABLE
+
+-- Display all tables
+SHOW TABLES;
+INSERT INTO customers (name, email, phone) VALUES
+('Dhana Lakshmi', 'dhana@example.com', '9876500001'),
+('Rahul', 'rahul@example.com', '9876500002'),
+('Sneha', 'sneha@example.com', '9876500003'),
+('Kiran', 'kiran@example.com', '9876500004');
+
+
+-- Verify the records
+
+-- 1. Display all pizzas
+-- 2. Display pizzas costing more than 250
+
+-- 3. Display pizzas from low to high price
+-- 4. Count pizzas in each category
+-- 5. Display customer orders
+
+-- 6. Display complete order details
+
+
+-- 7. Calculate total sales
+-- 8. Find the top-selling pizzas by quantity
+
+-- 9. Find customers who placed more than one order
+
+-- 10. Display pizzas with stock below 30
+
+-- Reset tables for a fresh project run
+-- 1. CHEFS
+--
+-- 11. Display all customers
+-- 12. Find the most expensive pizza
+-- 13. Find the cheapest pizza
+-- 14. Calculate average pizza price
+-- 15. Count total customers
+-- 16. Count total orders
+-- 17. Find total quantity of pizzas sold
+-- 18. Calculate sales for each pizza
+-- 19. Display orders with total bill
+-- 20. Find customers who have not placed orders
+-- 21. Find pizzas costing between 200 and 350
+-- 22. Search pizzas by name
+-- 23. Display the first three pizzas
+-- 24. Count orders placed by each customer
+-- 25. Find categories with more than one pizza
+-- 26. Increase all pizza prices by 10%
+
+
+
+-- 27. Add stock to Margherita
+UPDATE pizzas
+SET stock_quantity = stock_quantity + 10
+WHERE pizza_name = 'Margherita';
+
+
+-- 28. Display chefs and their pizzas
+
+-- 29. Display orders by date, newest first
+
+
+
+-- 30. Create a view for the sales report
+
+
+SHOW TABLES;
+
+SELECT COUNT(*) AS total_pizzas FROM pizzas;
+SELECT COUNT(*) AS total_customers FROM customers;
+SELECT COUNT(*) AS total_orders FROM orders;
+
+SELECT SUM(quantity_ordered * price_at_time_of_order)
+AS total_sales
+FROM order_details;
+
+
+
+
+
+SELECT pizza_name, price
+FROM pizzas
+WHERE price BETWEEN 200 AND 350;
+
+
+
+CREATE DATABASE IF NOT EXISTS pizza_store;
+USE pizza_store;
+
+-- STORES
+CREATE TABLE stores (
+    store_id INT AUTO_INCREMENT PRIMARY KEY,
+    store_name VARCHAR(100) NOT NULL,
+    city VARCHAR(50),
+    phone VARCHAR(15)
+);
+
+-- EMPLOYEES (1 Store has M Employees)
+CREATE TABLE employees (
+    employee_id INT AUTO_INCREMENT PRIMARY KEY,
+    store_id INT,
+    employee_name VARCHAR(100) NOT NULL,
+    role VARCHAR(50),
+    salary DECIMAL(10,2),
+    FOREIGN KEY (store_id) REFERENCES stores(store_id) ON DELETE CASCADE
+);
+
+-- CUSTOMERS
+CREATE TABLE customers (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15),
+    email VARCHAR(120) UNIQUE,
+    address VARCHAR(200)
+);
+
+-- PIZZAS
+CREATE TABLE pizzas (
+    pizza_id INT AUTO_INCREMENT PRIMARY KEY,
+    pizza_name VARCHAR(100) NOT NULL,
+    category VARCHAR(50), -- Veg / Non-Veg
+    size VARCHAR(20), -- Small / Medium / Large
+    price DECIMAL(10,2) CHECK (price > 0)
+);
+
+-- ORDERS (1 Customer has M Orders)
+CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT,
+    store_id INT,
+    order_date DATE,
+    order_status VARCHAR(20) DEFAULT 'Pending',
+    total_amount DECIMAL(10,2),
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE,
+    FOREIGN KEY (store_id) REFERENCES stores(store_id) ON DELETE SET NULL
+);
+
+-- ORDER_ITEMS (1 Order has M Items, M Items belong to 1 Pizza)
+CREATE TABLE order_items (
+    order_item_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    pizza_id INT,
+    quantity INT CHECK (quantity > 0),
+    unit_price DECIMAL(10,2),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
+    FOREIGN KEY (pizza_id) REFERENCES pizzas(pizza_id) ON DELETE CASCADE
+);
+
+-- PAYMENTS (1 Order has 1 Payment - 1:1)
+CREATE TABLE payments (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT UNIQUE, -- UNIQUE makes it 1:1
+    payment_method VARCHAR(20), -- UPI / Cash / Card
+    payment_status VARCHAR(20), -- Paid / Pending / Failed
+    payment_amount DECIMAL(10,2),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE
+);
